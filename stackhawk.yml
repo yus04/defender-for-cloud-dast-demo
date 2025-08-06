@@ -1,0 +1,8 @@
+# -- stackhawk configuration for juice shop app --
+app:
+  # -- An applicationId obtained from the StackHawk platform. --
+  applicationId: 30b8b27e-7e70-4085-9027-f1bdb8463fc6 # (required)
+  # -- The environment for the applicationId defined in the StackHawk platform. --
+  env: Development # (required)
+  # -- The url of your application to scan --
+  host: http://localhost # (required)
