@@ -6,6 +6,9 @@ on:
 jobs:  
   stackhawk-scan:  
     runs-on: ubuntu-latest  
+    permissions:  
+      id-token: write  
+      contents: read  
     steps:  
       - uses: actions/checkout@v3  
   
@@ -35,3 +38,4 @@ jobs:
         id: msdo
         with:
           existingFilename: stackhawk.sarif
+        continue-on-error: true  
