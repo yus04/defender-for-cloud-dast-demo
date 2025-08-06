@@ -20,3 +20,18 @@ jobs:
           apiKey: ${{ secrets.HAWK_API_KEY }}  
         env:  
           SARIF_ARTIFACT: true  
+
+      # SARIF ファイルをアップロード
+      - name: Upload SARIF file
+        uses: actions/upload-artifact@v4
+        with:
+          name: StackHawk_Report_${{ github.run_id }}
+          path: stackhawk.sarif
+          if-no-files-found: error
+      
+      # Microsoft Security DevOps Action を使用して結果をアップロード
+      - name: Upload results to MSDO
+        uses: microsoft/security-devops-action@v1
+        id: msdo
+        with:
+          existingFilename: stackhawk.sarif
