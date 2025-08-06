@@ -1,0 +1,22 @@
+name: StackHawk Scan  
+  
+on:  
+  workflow_dispatch:  
+  
+jobs:  
+  stackhawk-scan:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - uses: actions/checkout@v3  
+  
+      # Juice Shop を Docker で起動  
+      - name: Start Juice Shop  
+        run: docker run --rm --detach --publish 3000:3000 --name juice-shop bkimminich/juice-shop  
+  
+      # StackHawk スキャン実行  
+      - name: API Scan with StackHawk  
+        uses: stackhawk/hawkscan-action@v2.1.3  
+        with:  
+          apiKey: ${{ secrets.HAWK_API_KEY }}  
+        env:  
+          SARIF_ARTIFACT: true  
